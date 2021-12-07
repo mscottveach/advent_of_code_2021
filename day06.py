@@ -2,32 +2,6 @@
 ancestors_in_days = {}
 STARTING_DAYS = 256
 
-# def adam_spawn():
-#     print("Entering Adam Spawn.")
-#     global ancestors_in_days
-#     a_generation_is_born = False
-#     for days in range(255, 263+1):
-#         fish = []
-#         fish.append(6)
-#         # days = 17
-#         k = 7
-#         generation_count = 0
-#         for day in range(1, days):
-#             #print(day, len(fish))
-#             new_fish = []
-#             for idx, fish_age in enumerate(fish):
-#                 fish[idx] -= 1
-#                 if fish[idx] == -1:
-#                     new_fish.append(8)
-#                     fish[idx] = 6
-#
-#             fish = fish + new_fish
-#             print(day, len(fish))
-#         ancestors_in_days[days] = len(fish)
-#     print("Day ", days)
-#     print("Existing Adam Spawn")
-
-
 def spawn_by_day():
     spawners_on_day = {}
     for idx in range(0, 9):
