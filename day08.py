@@ -129,6 +129,7 @@ def grab_data():
 
 if __name__ == '__main__':
 
+
     the_wiring, the_output = grab_data()
     global_digit_count = 0
     for idx, a_wire in enumerate(the_wiring):
