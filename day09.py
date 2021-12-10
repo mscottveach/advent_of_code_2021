@@ -21,6 +21,7 @@ def calc_risk():
 
                     basins.append(find_size(idr, idc))
 
+    print(risk)
     basins = sorted(basins,reverse=True)
     print(basins[0] * basins[1] * basins[2])
     return risk
@@ -44,7 +45,6 @@ def lower_than_neighbors(idr,idc):
 
 def find_size(idr, idc):
     global line
-    #print(idr, idc)
     if line[idr][idc] != 9:
         line[idr][idc] = 9
         return(1 + find_size(idr-1,idc) + find_size(idr+1,idc) + find_size(idr,idc-1) + find_size(idr,idc+1))
