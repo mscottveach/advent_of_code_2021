@@ -29,20 +29,6 @@ def get_neighbors_and_cost(data, in_tuple):
 
     return [a_nbor, b_nbor, c_nbor, d_nbor]
 
-# def get_min_next_step(tpq):
-#     next_step_weights = list(zip(*tpq))[1]
-#     min_step = min(next_step_weights)
-#     min_step_idx = next_step_weights.index(min_step)
-#     curr_node = tpq[min_step_idx]
-#     tpq.pop(min_step_idx)
-#     return curr_node
-
-
-# def check_node_cost(tpq, name):
-#     node_idx = (list(zip(*tpq))[0]).index(name)
-#     node_cost = tpq[node_idx].cost
-#     return node_cost, node_idx
-
 
 def inc_grid(in_grid):
     height, width = in_grid.shape
@@ -88,20 +74,6 @@ def build_graph():
             grids = []
             a_grid = deepcopy(data)
 
-            # for idx in range(0,4):
-            #     a_grid = inc_grid(a_grid)
-            #     grids.append(a_grid)
-            #     #print(a_grid)
-            #
-            # print("Entering concat...")
-            # for a_grid in grids:
-            #     data = np.concatenate((data,a_grid),axis=1)
-            #
-            # a_grid = deepcopy(data)
-            # for idx in range(0,4):
-            #     a_grid = inc_grid(a_grid)
-            #     data = np.concatenate((data,a_grid),axis=0)
-
             for idx in range(0,4):
                 data = np.concatenate((data, a_grid), axis=1)
 
@@ -116,66 +88,6 @@ def build_graph():
 
         data = np.pad(data, pad_width=1, mode='constant', constant_values=BOUNDARY_COST)
         calculate_risk(data)
-
-
-
-# def calc_risk(data, height, width):
-#
-#     tpq = []
-#     starting_node = Node((1,1),0,[(1,1)])
-#     tpq.append(starting_node)
-#     while (height,width) not in list(zip(*tpq))[0]:
-#
-#         curr_node = get_min_next_step(tpq)
-#         nbors = get_neighbors(curr_node.name)
-#         print(curr_node.cost, len(curr_node.path))
-#         for nbor in nbors:
-#
-#             cost_to_enter = data[nbor]
-#             if cost_to_enter == BOUNDARY_COST:
-#                 continue
-#             new_list = curr_node.path.copy()
-#             new_list.append(nbor)
-#             new_node = Node(nbor, cost_to_enter + curr_node.cost, new_list)
-#
-#             if not tpq:
-#                 tpq.append(new_node)
-#             elif (nbor not in list(zip(*tpq))[0]) and (nbor not in curr_node.path):
-#                 tpq.append(new_node)
-#             elif nbor in list(zip(*tpq))[0]:
-#                 existing_cost, existing_cost_idx = check_node_cost(tpq, nbor)
-#                 if existing_cost > (cost_to_enter + curr_node.cost):
-#                     tpq.pop(existing_cost_idx)
-#                     tpq.append(new_node)
-#
-#     calc_path = curr_node.path
-#     final_path = ''
-#     total_risk = 0
-#     for pos in calc_path:
-#         total_risk += data[pos]
-#         final_path += str(data[pos])
-#     total_risk -= data[(1,1)]
-#     total_risk += data[(height,width)]
-#     final_path += str(data[(height,width)])
-#     print(total_risk, final_path)
-#
-# def flow_risk(data, starting_node):
-#     print(data)
-#     height, width = data.shape
-#     for ridx in range(1, height-1):
-#         for cidx in range(1, width-1):
-#             left_val = data[ridx][cidx-1]
-#             top_val = data[ridx-1][cidx]
-#             right_val = data[ridx][cidx+1]
-#             bot_val = data[ridx+1][cidx]
-#             prop_val = min(left_val,top_val,right_val,bot_val)
-#             data[ridx][cidx] += prop_val
-#             print(ridx, cidx, left_val, top_val, data[ridx][cidx])
-#
-#     print(data[width-2][height-2] - data[1][1])
-
-
-
 
 def calculate_risk(data):
     width, height = data.shape
